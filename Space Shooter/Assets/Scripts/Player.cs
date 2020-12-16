@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int _score = 0;
     [SerializeField] private GameObject _rightEngine;
     [SerializeField] private GameObject _leftEngine;
-
+    
     private UIManager _uiManager;
     private float _canFire = -1f;
     private SpawnManager _spawnManager;
@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
          transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+
 
         if (_spawnManager == null)    
         {
@@ -84,7 +85,6 @@ public class Player : MonoBehaviour
             Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
         }
     }
-
     public void Damage()
     {
         if (_shieldsPowerup == true)
@@ -114,7 +114,6 @@ public class Player : MonoBehaviour
                 _spawnManager.OnPlayerDeath();
                 _uiManager.GameOver();
             }
-
         }
     }
 
@@ -154,6 +153,4 @@ public class Player : MonoBehaviour
         _score += points;
         _uiManager.UpdateScore(_score);
     }
-
-
 }

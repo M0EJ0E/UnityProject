@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] 
-    private GameObject _enemyPrefab;
-    [SerializeField]
-    private GameObject _enemyContainer;
-    [SerializeField] 
-    private GameObject[] powerups;
+    [SerializeField] private GameObject _enemyPrefab;
+    [SerializeField] private GameObject _enemyContainer;
+    [SerializeField] private GameObject[] powerups;
 
 
     private bool _stopSpawning = false;
@@ -49,7 +46,6 @@ public class SpawnManager : MonoBehaviour
                 yield return new WaitForSeconds(Random.Range(3, 8));
             }
         }
-    
     public void OnPlayerDeath()
     {
         _stopSpawning = true;

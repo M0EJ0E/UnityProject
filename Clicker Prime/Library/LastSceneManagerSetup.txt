@@ -1,0 +1,5 @@
+sceneSetups:
+- path: Assets/RMAssests/Monsters Creatures Fantasy/Demo/SceneDemo.unity
+  isLoaded: 1
+  isActive: 1
+  isSubScene: 0
