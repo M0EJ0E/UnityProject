@@ -8,11 +8,12 @@ public class Enemy : MonoBehaviour
     float _speed = 4.0f;
     private Player _player;
     private Animator _anim;
- 
+    
 
     // Start is called before the first frame update
     void Start()
     {
+        gameObject.GetComponent<BoxCollider2D>().enabled = true; //enable collider at start
         _player = GameObject.Find("Player").GetComponent<Player>();
         if (_player == null)
         {
@@ -41,6 +42,7 @@ public class Enemy : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            gameObject.GetComponent<BoxCollider2D>().enabled = false; //disable collider after first collision
             _anim.SetTrigger("OnEnemyDeath");
             _speed = 0;
             Destroy(this.gameObject, 2.8f);
@@ -50,20 +52,23 @@ public class Enemy : MonoBehaviour
             {
                 player.Damage();
             }
+
         }
 
         if (other.tag == "Laser")
         {
-            _speed = 0;
+            gameObject.GetComponent<BoxCollider2D>().enabled = false; //disable collider after first collision
             _anim.SetTrigger("OnEnemyDeath");
+            _speed = 0;
             Destroy(this.gameObject, 2.8f);
+
 
             if (_player != null)
             {
                 _player.AddScore(Random.Range(3,12));
             }
-
             Destroy(other.gameObject); 
         }
+
     }
 }

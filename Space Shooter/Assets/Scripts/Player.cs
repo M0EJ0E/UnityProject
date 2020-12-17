@@ -19,7 +19,8 @@ public class Player : MonoBehaviour
     [SerializeField] private int _score = 0;
     [SerializeField] private GameObject _rightEngine;
     [SerializeField] private GameObject _leftEngine;
-    
+    [SerializeField] private GameObject _explosionPrefab;
+    //private bool _speedPowerUpCheck = false;
     private UIManager _uiManager;
     private float _canFire = -1f;
     private SpawnManager _spawnManager;
@@ -111,6 +112,7 @@ public class Player : MonoBehaviour
             if (_lives < 1)
             {
                 Destroy(this.gameObject);
+                Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
                 _spawnManager.OnPlayerDeath();
                 _uiManager.GameOver();
             }
@@ -131,9 +133,12 @@ public class Player : MonoBehaviour
 
     public void SpeedBoostActive()
     {
-        _speedPowerup = true;
-        _speed *= _speedBoost;
-        StartCoroutine(SpeedBoostCoolDownRoutine());
+        if (_speedPowerup == false)
+        {
+            _speedPowerup = true;
+            _speed *= _speedBoost;
+            StartCoroutine(SpeedBoostCoolDownRoutine());
+        }           
     }
 
     IEnumerator SpeedBoostCoolDownRoutine()
